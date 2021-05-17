@@ -1,0 +1,36 @@
+# Activation du mod rewrite d'Apache 
+RewriteEngine on
+
+
+# Réécriture url accueil
+RewriteRule Accueil index.php
+
+# Réécriture des URL d'une realisation
+RewriteRule Realisation-([a-z0-9]+) index.php?page=realisation&idReal=$1
+
+# Réécriture des url des themes de réalisations
+RewriteRule Realisations-([a-zA-Z]+) index.php?page=realisations&themeReal=$1
+
+# Réécriture url realisations
+RewriteRule Realisations index.php?page=realisations
+
+# Réécriture url A propos
+RewriteRule Qui_Sommes-nous index.php?page=propos
+
+# Réécriture url Services
+RewriteRule Services index.php?page=services
+
+# Réécriture url Actualites
+RewriteRule Actualites index.php?page=actualites
+
+# Réécriture des URL d'une Actualite
+RewriteRule Actualite-([a-z0-9]+) index.php?page=actualite&idActu=$1
+
+# Réécriture url recrutement
+RewriteRule Recrutement index.php?page=recrutement
+
+# Réécriture url contact
+RewriteRule Contact index.php?page=contact
+
+# Réécriture url admin
+RewriteRule Admin index.php?page=admin
