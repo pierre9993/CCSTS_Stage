@@ -46,6 +46,11 @@
 
   <div class="bg-light border contact-form">
     <h3 class="mb-3"><u>Formulaire de Contact</u></h3>
+    <?php 
+    if(isset($envoyeMail)){
+      echo "<div style='color:green;'>l'envoye du mail à bien été effectué !</div>";
+    };
+    ?>
 <!-- Formulaire de contact -->
     <form class="form" id="form" action="" enctype="multipart/form-data" method="POST">
         <div class="d-flex flex-row justify-content-between">
