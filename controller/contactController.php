@@ -75,7 +75,7 @@ class contactController
                 if (!$mail->send()) {
                     echo $mail->ErrorInfo;
               } else{
-                    echo 'Message bien envoyé';
+                   $envoyeMail=true;
               }
             } 
             else {
