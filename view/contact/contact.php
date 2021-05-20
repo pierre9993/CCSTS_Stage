@@ -17,6 +17,7 @@
 
 <section id="marg" class="d-flex flex-row justify-content-around align-items-start flex-wrap mt-4">
 <!-- Informations de contact + carte -->
+
   <div class="info-contact d-flex flex-column align-items-center text-center justify-content-center border bg-light" >
 
     <h3 class="mb-3"><u>Comment nous contacter </u></h3>
@@ -84,21 +85,21 @@
           <label for="qui"><u>Vous êtes :</u><span class="red">*</span></label>
           <div class="d-flex flex-row justify-content-between">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="qui" id="qui1" value="option1" checked />
+              <input class="form-check-input" type="radio" name="qui" id="qui1" value="Collectivité" checked />
               <label class="form-check-label" for="exampleRadios1">
                 Collectivité
               </label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="qui" id="qui2" value="option2" />
+              <input class="form-check-input" type="radio" name="qui" id="qui2" value="Entreprise" />
               <label class="form-check-label" for="exampleRadios2">
                 Entreprise
               </label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="qui" id="qui3" value="option3" />
+              <input class="form-check-input" type="radio" name="qui" id="qui3" value="Particulier" />
               <label class="form-check-label" for="exampleRadios3">
                 Particulier
               </label>
