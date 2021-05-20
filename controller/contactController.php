@@ -56,7 +56,7 @@ class contactController
                 if($mail->SMTPAuth){
                     $mail->SMTPSecure = 'ssl';               //Protocole de sécurisation des échanges avec le SMTP
                     $mail->Username   =  'm.pierre9993@gmail.com';   //Adresse email à utiliser
-                    $mail->Password   =  'FDFXH8PXFN';         //Mot de passe de l'adresse email à utiliser
+                    $mail->Password   =  'oops';         //Mot de passe de l'adresse email à utiliser
                 }
                 $mail->CharSet = 'UTF-8'; //Format d'encodage à utiliser pour les caractères
                 $mail->smtpConnect();
