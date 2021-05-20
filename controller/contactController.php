@@ -45,7 +45,8 @@ class contactController
             }
             
             if ($nom && $prenom && $email && $message && $motif) {
-                //IL FAUT ABSOLUMENT FAIRE UNE FONCTION MAIL SINON ON EST DANS LA MERDE
+                //IL FAUT ABSOLUMENT FAIRE UNE FONCTION MAIL SINON ON EST DANS LA sauce
+               
                 $mail = new PHPMailer(True);
                 $mail->IsSMTP();
                 $mail->Host = 'localhost';               //Adresse IP ou DNS du serveur SMTP
