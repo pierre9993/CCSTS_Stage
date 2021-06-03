@@ -73,7 +73,7 @@ CREATE TABLE reference(
    PRIMARY KEY(reference_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE service_real(
+CREATE TABLE concerne(
    id_real INT,
    id_service INT,
    PRIMARY KEY(id_real, id_service),
@@ -81,7 +81,7 @@ CREATE TABLE service_real(
    FOREIGN KEY(id_service) REFERENCES service(service_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE actu_real(
+CREATE TABLE parle_de(
    id_actu INT,
    id_real INT,
    PRIMARY KEY(id_actu, id_real),
