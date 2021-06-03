@@ -59,7 +59,7 @@ class RealisationModel extends Entity
     public function getRealisation($id)
     {
         $requete = $this->bdd->prepare('SELECT * FROM realisation r 
-                                        LEFT JOIN service_real sr ON r.real_id=sr.id_real  
+                                        LEFT JOIN concerne c ON r.real_id=c.id_real  
                                         WHERE r.real_id=:id ;');
         $requete->execute([":id" => $id]);
         $resultat = $requete->fetch();
@@ -111,7 +111,6 @@ class RealisationModel extends Entity
     public function createReal()
     {
 
-
         $sql = 'INSERT INTO realisation (real_titre ,real_logo ,real_paragraphe_un ,real_paragraphe_deux ,real_lieu ,real_cout,real_theme,real_date_debut ,real_date_fin, 
             real_img_un ,real_img_deux,real_img_trois,real_img_quatre,real_img_cinq) 
             VALUES (:real_titre ,:real_logo ,:real_paragraphe_un ,:real_paragraphe_deux ,:real_lieu ,:real_cout,:real_theme,:real_date_debut ,:real_date_fin, 
@@ -133,27 +132,28 @@ class RealisationModel extends Entity
             ":real_img_quatre" => $this->image4,
             ":real_img_cinq" => $this->image5,
         ]);
-
-        // Si une service a été selectionner, on crée la liaison dans la table service_real
         if ($this->service !== null) {
-
+            // Si une service a été selectionner, on crée la liaison dans la table service_real
+            
+            //récupère l'id de la réalisation qui vient d'être crée
             $requete2 = $this->bdd->prepare('SELECT real_id FROM realisation ORDER BY real_id DESC LIMIT 1');
             $requete2->execute();
             $result = $requete2->fetch();
             foreach ($this->service as $serv) {
-
-                $requete3 = $this->bdd->prepare('INSERT into service_real (id_real,id_service)
+                //pour chaque service sélectionné , crée une ligne dans la table concerne 
+                $requete3 = $this->bdd->prepare('INSERT into concerne (id_real,id_service)
                                         VALUES (:id_real,:id_service); ');
                 $requete3->execute([':id_real' => $result['real_id'], ":id_service" => $serv]);
+       
             }
         }
-        $this->bdd = null;
+        
     }
 
     //méthode Model supprime une actualité dèjà existante
     public function deleteReal($id)
     {
-        $requete = $this->bdd->prepare('DELETE FROM service_real
+        $requete = $this->bdd->prepare('DELETE FROM concerne
                                         WHERE id_real=:id ;
                                         DELETE FROM realisation
                                         WHERE real_id=:id ;');
@@ -166,8 +166,8 @@ class RealisationModel extends Entity
     public function getServicebyReal($id_real)
     {
         $requete = $this->bdd->prepare('SELECT * FROM service s
-                                        INNER JOIN service_real sr ON sr.id_service=s.service_id
-                                        WHERE sr.id_real=:id_real;');
+                                        INNER JOIN concerne c ON c.id_service=s.service_id
+                                        WHERE c.id_real=:id_real;');
         $requete->execute([":id_real" => $id_real]);
         $resultat = $requete->fetchAll();
         $this->bdd = null;

@@ -76,8 +76,8 @@ class ServiceModel extends Entity
     public function getRealbyService($id_service)
     {
         $requete = $this->bdd->prepare('SELECT * FROM realisation r
-                                        INNER JOIN service_real sr ON sr.id_real=r.real_id
-                                        WHERE sr.id_service=:id_service
+                                        INNER JOIN concerne c ON c.id_real=r.real_id
+                                        WHERE c.id_service=:id_service
                                         ORDER BY real_id DESC
                                         LIMIT 5 ;');
         $requete->execute([":id_service" => $id_service]);
@@ -105,7 +105,7 @@ class ServiceModel extends Entity
                     <div id="s-real" class="d-flex flex-row align-items-center justify-content-around mb-3 container">';
         foreach ($reals_service as $real_service) {
 
-            echo '<a href="Realisation-' . $real_service['real_id'] . '"><img class="service-img-real" src="' . $real_service['real_logo'] . '" alt="' . $real_service['real_titre'] . '"/></a>';
+            echo '<a href="realisation-' . $real_service['real_id'] . '"><img class="service-img-real" src="' . $real_service['real_logo'] . '" alt="' . $real_service['real_titre'] . '"/></a>';
         }
 
         echo '</div> </div> </article>';
