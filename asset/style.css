@@ -283,8 +283,8 @@ a.logo-head {
   height: 940px;
 }
 .img-accueil {
-  /*background-image: url("https://cdn.glitch.com/43973070-afe2-4423-852e-d376c10473cd%2F4kSiOnEstChanceux.jpg?v=1615546728835");*/
-  background-image: url("IMG_accueil.jpg");
+  background-image: url("indexImg.jpg");
+  /*background-image: url("IMG_accueil.jpg");*/
   background-position: center, bottom;
   background-attachment: fixed;
   transform: scale(1.16) translateY(-60px) translateX(20px);
