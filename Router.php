@@ -12,21 +12,33 @@ include_once("controller/contactController.php");
 class Router
 {
 
-    private $page;
-
-
-    public function __construct($page = 0)
-    {
-        $this->page = $page;
-    }
-
     /**
      * Déclenche l'appel au controller adéquat en fonction de la page demandée par l'utilisateur.
      */
-    public function getPage()
+    public static function getPage($page = 0)
     {
 
-        switch ($this->page) {
+        switch ($page) {
+            case 'actualites':
+                $actualite = new actualiteController;
+                $actualite->showActualites();
+                break;
+            case 'actualite':
+                $actualit = new actualiteController;
+                $actualit ->showActualite(@$_GET['idActu']);
+                break;
+            case 'realisations':
+                $realisations = new realisationController;
+                $realisations->showRealisations();
+                break;
+            case 'realisationsv2':
+                $realisations = new realisationController;
+                $realisations->showRealisationsv2();
+                break;
+            case 'realisation':
+                $realisation = new realisationController;
+                $realisation->showRealisation(@$_GET['idReal']);
+                break;
             case 'admin':
                 $admin = new adminController;
                 $admin->showAdmin();
@@ -54,26 +66,6 @@ class Router
             case "recrutForm":
                 $recrut =  new recrutementController;
                 $recrut->verifRecrutement();
-                break;
-            case 'actualites':
-                $actualite = new actualiteController;
-                $actualite->showActualites();
-                break;
-            case 'actualite':
-                $actualit = new actualiteController;
-                $actualit ->showActualite(@$_GET['idActu']);
-                break;
-            case 'realisations':
-                $realisations = new realisationController;
-                $realisations->showRealisations();
-                break;
-            case 'realisationsv2':
-                $realisations = new realisationController;
-                $realisations->showRealisationsv2();
-                break;
-            case 'realisation':
-                $realisation = new realisationController;
-                $realisation->showRealisation(@$_GET['idReal']);
                 break;
             case 'recrutement':
                 $recrutement = new recrutementController;
