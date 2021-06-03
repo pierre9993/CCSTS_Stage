@@ -79,7 +79,6 @@ class contactController
               }
             } 
             else {
-                //IL FAUT FINIR CA QUOI
                 echo 'Erreur : envoye du formulaire interrompu';
             }
         }
