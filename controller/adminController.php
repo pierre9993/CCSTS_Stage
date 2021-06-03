@@ -52,7 +52,8 @@ class AdminController
 
             if (password_verify($_POST["pass"], $admin["admin_password"])) {
                 $_SESSION["role"] = "admin";
-                $_SESSION["password"] = $admin["admin_password"];
+                //garde le name pour pouvoir le réutiliser si besoin
+                $_SESSION["name"] = $_POST["name"];
                 header('Location: index.php?page=admin');
             } else {
                 //sinon renvoi sur la page index
@@ -256,9 +257,11 @@ class AdminController
         //Si une requête est envoyé et que l'uilisateur est un admin
 
         if (isset($_POST["verification"]) && $_SESSION['role'] === "admin") {
-            //Si le mot de passe rentré correspond à celui de la session admin
-
-            if (password_verify($_POST["mdp"], $_SESSION['password'])) {
+            //si le contenu de l'input correspond au mot de passe récupéré grâce au name de la session admin.
+            $admin = new AdminModel;
+            $mdp = $admin->getPassword(@$_SESSION["name"]);
+            
+            if (password_verify($_POST["mdp"], $mdp['admin_password'])) {
                 //Supprime l'employé sélectionné.
 
                 $delEmp = new EmployeModel;
@@ -272,7 +275,6 @@ class AdminController
             }
         }
         //renvoi la view du formulaire.
-
         include('view/admin/deleteEmployeFormView.php');
     }
 

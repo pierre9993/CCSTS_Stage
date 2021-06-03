@@ -31,12 +31,6 @@ class realisationController
         $cout = $this->verif->verifInput(@$_POST['cout']);
         $theme = $this->verif->verifInput(@$_POST['theme']);
         $date_debut = $this->verif->verifDate(@$_POST['date_debut']);
-        $date_fin = $this->verif->verifDate(@$_POST['date_fin']);
-        $image1 = $this->fileVerif->verifImage('img_un');
-        $image2 = $this->fileVerif->verifImage('img_deux');
-        $image3 = $this->fileVerif->verifImage('img_trois');
-        $image4 = $this->fileVerif->verifImage('img_quatre');
-        $image5 = $this->fileVerif->verifImage('img_cinq');
         //Si les élements désignés sont valides alors return vrai sinon renvoi un tableau avec les états des inputs 
         if ($titre && $logo && $paragraphe1 && $paragraphe2 && $lieu && $cout && $theme && $date_debut) {
             return true;
@@ -225,8 +219,11 @@ class realisationController
 
         //si l'input vérification est completer et que l'utilisateur est une admin 
         if (isset($_POST["verification"]) && $_SESSION['role'] === "admin") {
-            //Si le mot de passe envoyé correspond à celui de la session admin
-            if (password_verify($_POST["mdp"], $_SESSION['password'])) {
+            //si le contenu de l'input correspond au mot de passe récupéré grâce au name de la session admin.
+            $admin = new AdminModel;
+            $mdp = $admin->getPassword(@$_SESSION["name"]);
+            
+            if (password_verify($_POST["mdp"], $mdp['admin_password'])) {
                 //Suppresion de l'article
                 $realr2 = new RealisationModel;
                 $realr2->deleteReal($id);
