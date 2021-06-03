@@ -5,8 +5,6 @@ if (isset($_GET["disconnect"])) {
     $_SESSION['role'] = null;
     $_SESSION['name'] = null;
 }
-if($_SESSION['acces']===1){
-
 //on inclut la bdd pour pouvoir s'y connecter
 include_once("bdd.php");
 
@@ -23,7 +21,3 @@ include_once("view/menu/footer.php");
 
 
 
-}
-else{
-     include('testacces.php');
-    }
