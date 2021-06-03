@@ -140,7 +140,7 @@ class recrutementController
                 $createrecrut->competence = @$_POST["competence"];
                 $createrecrut->createRecrutement();
                 //renvoi vers la page admin
-                header('Location: index.php?page=admin');
+                //header('Location: index.php?page=admin');
             } else {
                 //affiche le message d'erreur
                 echo "<div style='width:100%' class='bg-danger text-light text-center' >Les champs ne sont pas remplis correctement</div>";
@@ -158,8 +158,11 @@ class recrutementController
         $recrutr = $recrut->getRecrutement($id);
         //si l'input de vérification est rempli et l'utilisateur est un admin
         if (isset($_POST["verification"]) && $_SESSION['role'] === "admin") {
-            //si le contenu de l'input correspond au mot de passe de la session admin.
-            if (password_verify($_POST["mdp"], $_SESSION['password'])) {
+            //si le contenu de l'input correspond au mot de passe récupéré grâce au name de la session admin.
+            $admin = new AdminModel;
+            $mdp = $admin->getPassword(@$_SESSION["name"]);
+            
+            if (password_verify($_POST["mdp"], $mdp['admin_password'])) {
                 //supprime le recrutement spécifique
                 $recrud= new RecrutementModel;
                 $recrud->deleteRecrutement($id);

@@ -177,8 +177,11 @@ class actualiteController
         $act = $act->getActualite($id);
         //Si une requête est envoyé et que l'uilisateur est un admin
         if (isset($_POST["verification"]) && $_SESSION['role'] === "admin") {
-            //Si le mot de passe rentré correspond à celui de la session admin
-            if (password_verify($_POST["mdp"], $_SESSION['password'])) {
+            //si le contenu de l'input correspond au mot de passe récupéré grâce au name de la session admin.
+            $admin = new AdminModel;
+            $mdp = $admin->getPassword(@$_SESSION["name"]);
+            
+            if (password_verify($_POST["mdp"], $mdp['admin_password'])) {
                 //Supprime l'actualité sélectionné.
                 $actu = new ActualiteModel;
                 $actu->deleteActu($id);

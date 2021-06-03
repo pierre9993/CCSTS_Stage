@@ -19,9 +19,7 @@ class serviceController
     }
 
     public function verifInputService()
-    {
-        //Vérifie les inputs
-
+    {     
         $titre = $this->verif->verifInput(@$_POST['titre']);
         $img  = $this->fileVerif->verifImage('image_un');
         $description = $this->verif->verifParagraphe(@$_POST['description']);
@@ -180,9 +178,11 @@ class serviceController
         //si l'input de vérification est rempli et l'utilisateur est un admin
 
         if (isset($_POST["verification"]) && $_SESSION['role'] === "admin") {
-            //si le contenu de l'input correspond au mot de passe de la session admin.
-
-            if (password_verify($_POST["mdp"], $_SESSION['password'])) {
+            //si le contenu de l'input correspond au mot de passe récupéré grâce au name de la session admin.
+            $admin = new AdminModel;
+            $mdp = $admin->getPassword(@$_SESSION["name"]);
+            
+            if (password_verify($_POST["mdp"], $mdp['admin_password'])) {
                 //supprime le service spécifique
 
                 $delserv = new ServiceModel;
